@@ -1,0 +1,10 @@
+com\rentacostume\reviews\config\ReviewsCorsConfig.class
+com\rentacostume\reviews\controller\ReviewController.class
+com\rentacostume\reviews\repository\ReviewRepository.class
+com\rentacostume\reviews\service\ReviewService.class
+com\rentacostume\reviews\config\KafkaProducerConfig.class
+com\rentacostume\reviews\dto\CreateReviewRequest.class
+com\rentacostume\reviews\model\Review.class
+com\rentacostume\reviews\dto\ReviewResponse.class
+com\rentacostume\reviews\ReviewServiceApplication.class
+com\rentacostume\reviews\clients\OrderClient.class

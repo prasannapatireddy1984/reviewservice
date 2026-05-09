@@ -1,0 +1,10 @@
+C:\MyProjects\gitrepo\RentACostume\reviewservice\reviewservice\src\main\java\com\rentacostume\reviews\controller\ReviewController.java
+C:\MyProjects\gitrepo\RentACostume\reviewservice\reviewservice\src\main\java\com\rentacostume\reviews\repository\ReviewRepository.java
+C:\MyProjects\gitrepo\RentACostume\reviewservice\reviewservice\src\main\java\com\rentacostume\reviews\service\ReviewService.java
+C:\MyProjects\gitrepo\RentACostume\reviewservice\reviewservice\src\main\java\com\rentacostume\reviews\dto\CreateReviewRequest.java
+C:\MyProjects\gitrepo\RentACostume\reviewservice\reviewservice\src\main\java\com\rentacostume\reviews\model\Review.java
+C:\MyProjects\gitrepo\RentACostume\reviewservice\reviewservice\src\main\java\com\rentacostume\reviews\clients\OrderClient.java
+C:\MyProjects\gitrepo\RentACostume\reviewservice\reviewservice\src\main\java\com\rentacostume\reviews\config\ReviewsCorsConfig.java
+C:\MyProjects\gitrepo\RentACostume\reviewservice\reviewservice\src\main\java\com\rentacostume\reviews\config\KafkaProducerConfig.java
+C:\MyProjects\gitrepo\RentACostume\reviewservice\reviewservice\src\main\java\com\rentacostume\reviews\dto\ReviewResponse.java
+C:\MyProjects\gitrepo\RentACostume\reviewservice\reviewservice\src\main\java\com\rentacostume\reviews\ReviewServiceApplication.java
