@@ -14,7 +14,9 @@ public class ReviewsCorsConfig {
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration cfg = new CorsConfiguration();
-        cfg.setAllowedOrigins(List.of("http://localhost:3000")); // UI origin
+        cfg.setAllowedOrigins(List.of("http://localhost:3000",
+                "https://rentacostume-ui.vercel.app"
+        )); // UI origin
         cfg.setAllowedMethods(List.of("GET","POST","PUT","DELETE","OPTIONS"));
         cfg.setAllowedHeaders(List.of("*"));
         cfg.setAllowCredentials(true);
