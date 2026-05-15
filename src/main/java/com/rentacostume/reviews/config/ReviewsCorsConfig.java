@@ -15,7 +15,9 @@ public class ReviewsCorsConfig {
     public CorsFilter corsFilter() {
         CorsConfiguration cfg = new CorsConfiguration();
         cfg.setAllowedOrigins(List.of("http://localhost:3000",
-                "https://rentacostume-ui-eblo.vercel.app"
+                "https://rentacostume-ui-eblo.vercel.app",
+                "https://www.costumeaura.com",
+                "https://costumeaura.com"
         )); // UI origin
         cfg.setAllowedMethods(List.of("GET","POST","PUT","DELETE","OPTIONS"));
         cfg.setAllowedHeaders(List.of("*"));
