@@ -9,5 +9,8 @@ import java.util.Optional;
 
 public interface ReviewRepository extends MongoRepository<Review, String> {
     Page<Review> findByProductId(String productId, Pageable pageable);
-    Optional<Review> findByUserIdAndProductId(String userId, String productId);
-}
+    Optional<Review> findByUserIdAndOrderIdAndProductId(
+            String userId,
+            String orderId,
+            String productId
+    );}

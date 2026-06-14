@@ -1,9 +1,9 @@
 package com.rentacostume.reviews.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rentacostume.reviews.clients.OrderClient;
 import com.rentacostume.reviews.dto.CreateReviewRequest;
 import com.rentacostume.reviews.model.Review;
+import com.rentacostume.reviews.repository.CompletedRentalRepository;
 import com.rentacostume.reviews.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,9 +20,9 @@ import java.util.Map;
 public class ReviewService {
 
     private final ReviewRepository repo;
-    private final OrderClient orderClient;
     private final KafkaTemplate<String, String> kafka;
     private final ObjectMapper objectMapper;
+    private final CompletedRentalRepository completedRentalRepository;
 
     @Value("${rentacostume.kafka.topics.review.created}")
     private String topicCreated;
@@ -32,19 +32,33 @@ public class ReviewService {
     private String topicDeleted;
 
     public Review create(String userId, CreateReviewRequest req) {
-        repo.findByUserIdAndProductId(userId, req.getProductId())
-                .ifPresent(r -> { throw new IllegalStateException("You already reviewed this item."); });
+        repo.findByUserIdAndOrderIdAndProductId(
+                userId,
+                req.getOrderId(),
+                req.getProductId()
+        ).ifPresent(r -> {
+            throw new IllegalStateException("You already reviewed this item for this reservation.");
+        });
 
-        boolean verified = orderClient.hasPurchased(userId, req.getProductId());
-        System.out.println("The value of verified"+verified);
+        boolean completedRental =
+                completedRentalRepository.existsByUserIdAndOrderIdAndProductId(
+                        userId,
+                        req.getOrderId(),
+                        req.getProductId()
+                );
+
+        if (!completedRental) {
+            throw new IllegalStateException("Review allowed only for completed rentals.");
+        }
         Review r = new Review();
         r.setUserId(userId);
+        r.setOrderId(req.getOrderId());
         r.setProductId(req.getProductId());
         r.setRating(req.getRating());
         r.setTitle(req.getTitle());
         r.setBody(req.getBody());
         r.setImages(req.getImages() == null ? List.of() : req.getImages());
-        r.setVerifiedPurchase(verified);
+        r.setVerifiedPurchase(true);
         r.setHelpfulCount(0);
         r.setNotHelpfulCount(0);
         r.setReported(false);
@@ -55,6 +69,7 @@ public class ReviewService {
         publish(topicCreated, Map.of(
                 "type","review.created",
                 "reviewId", r.getId(),
+                "orderId", r.getOrderId(),
                 "productId", r.getProductId(),
                 "userId", r.getUserId(),
                 "rating", r.getRating(),

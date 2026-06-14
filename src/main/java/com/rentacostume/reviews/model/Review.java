@@ -10,7 +10,7 @@ import java.util.List;
 
 @Data
 @Document("reviews")
-@CompoundIndex(name = "user_product_unique", def = "{'userId': 1, 'productId': 1}", unique = true)
+@CompoundIndex(name = "user_order_product_unique", def = "{'userId': 1, 'orderId': 1, 'productId': 1}", unique = true)
 public class Review {
     @Id private String id;
     private String productId;
@@ -25,4 +25,5 @@ public class Review {
     private boolean reported;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private String orderId;
 }

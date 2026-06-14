@@ -22,6 +22,9 @@ public class CreateReviewRequest {
 
         private List<String> images;
 
+        @NotBlank
+        private String orderId;
+
         // --- Getters and Setters ---
         public String getProductId() {
                 return productId;
@@ -61,5 +64,12 @@ public class CreateReviewRequest {
 
         public void setImages(List<String> images) {
                 this.images = images;
+        }
+
+        public String getOrderId() {
+                return orderId;
+        }
+        public void setOrderId(String orderId) {
+                this.orderId = orderId;
         }
 }
