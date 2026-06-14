@@ -5,7 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 
 @Data
 @Document("completed_rentals")
@@ -27,5 +27,5 @@ public class CompletedRental {
     private String vendorId;
     private String vendorName;
 
-    private OffsetDateTime completedAt;
+    private LocalDateTime completedAt;
 }

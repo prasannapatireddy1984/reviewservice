@@ -68,8 +68,11 @@ public class RentalCompletedConsumer {
             rental.setCostumeTitle(event.getCostumeTitle());
             rental.setVendorId(event.getVendorId());
             rental.setVendorName(event.getVendorName());
-            rental.setCompletedAt(event.getOccurredAt());
-
+            rental.setCompletedAt(
+                    event.getOccurredAt() != null
+                            ? event.getOccurredAt().toLocalDateTime()
+                            : java.time.LocalDateTime.now()
+            );
             repository.save(rental);
 
         } catch (Exception e) {
