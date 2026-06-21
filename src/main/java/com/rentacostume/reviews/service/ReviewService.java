@@ -66,15 +66,20 @@ public class ReviewService {
         r.setUpdatedAt(LocalDateTime.now());
         r = repo.save(r);
         System.out.println("Before Publishing"+topicCreated);
-        publish(topicCreated, Map.of(
-                "type","review.created",
-                "reviewId", r.getId(),
-                "orderId", r.getOrderId(),
-                "productId", r.getProductId(),
-                "userId", r.getUserId(),
-                "rating", r.getRating(),
-                "verifiedPurchase", r.isVerifiedPurchase()
-        ));
+        try {
+            publish(topicCreated, Map.of(
+                    "type", "review.created",
+                    "reviewId", r.getId(),
+                    "orderId", r.getOrderId(),
+                    "productId", r.getProductId(),
+                    "userId", r.getUserId(),
+                    "rating", r.getRating(),
+                    "verifiedPurchase", r.isVerifiedPurchase()
+            ));
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         return r;
     }
 
@@ -122,7 +127,7 @@ public class ReviewService {
             kafka.send(topic, (String) evt.getOrDefault("productId","*"), objectMapper.writeValueAsString(evt));
             System.out.println("After kafka send");
 
-        } catch (Exception exception) {
+        } catch (Throwable exception) {
             exception.printStackTrace();
         }
     }
